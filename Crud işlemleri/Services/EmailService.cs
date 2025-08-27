@@ -7,7 +7,7 @@ namespace Crud_işlemleri.Services
     {
         Task SendEmailAsync(string toEmail, string subject, string message);
     }
-    public class EmailService
+    public class EmailService: IEmailService
     {
      
             private readonly IConfiguration _configuration;
