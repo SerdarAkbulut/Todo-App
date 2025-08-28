@@ -26,5 +26,4 @@ Ayrıca JWT tabanlı kimlik doğrulama ve email ile şifre sıfırlama özellikl
 - ASP.NET Core Identity
 - JWT (JSON Web Token)
 - SMTP Email (Gmail)
-- OpenAPI / Swagger
 - Newtonsoft.Json
