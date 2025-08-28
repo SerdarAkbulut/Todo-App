@@ -1,15 +1,30 @@
+# CRUD Ä°ÅŸlemleri Projesi
 
-Bu proje, .NET 8 kullanılarak geliştirilmiş basit ama genişletilebilir bir **Todo Yönetim API’si**dir.  
-Kullanıcıların kimlik doğrulama ile giriş yapabileceği, görev ekleme, güncelleme, silme ve listeleme işlemlerini yapabileceği bir yapıya sahiptir.
+Bu proje, **ASP.NET Core 9.0 Web API** kullanÄ±larak geliÅŸtirilmiÅŸ bir **CRUD (Create, Read, Update, Delete)** uygulamasÄ±dÄ±r.  
+KullanÄ±cÄ± yÃ¶netimi iÃ§in **ASP.NET Core Identity**, veri yÃ¶netimi iÃ§in **Entity Framework Core (SQL Server)** kullanÄ±lmÄ±ÅŸtÄ±r.  
+AyrÄ±ca JWT tabanlÄ± kimlik doÄŸrulama ve email ile ÅŸifre sÄ±fÄ±rlama Ã¶zellikleri entegre edilmiÅŸtir.
 
 ---
 
-## ?? Özellikler
+## ğŸš€ Ã–zellikler
 
-- ? Kullanıcı kayıt ve giriş sistemi (Identity)
-- ? JWT (JSON Web Token) ile kimlik doğrulama
-- ? Todo ekleme, listeleme, güncelleme ve silme
-- ? Entity Framework Core ile veritabanı yönetimi
-- ? DTO (Data Transfer Object) katmanı kullanımı
-- ? Katmanlı mimari (Entity, Data, Business, API)
-- ? Swagger UI ile API test imkanı
+- KullanÄ±cÄ± kayÄ±t, giriÅŸ ve kimlik doÄŸrulama iÅŸlemleri
+- JWT token ile gÃ¼venli API eriÅŸimi
+- Åifre sÄ±fÄ±rlama ve email gÃ¶nderimi
+- Todo listesi yÃ¶netimi (CRUD)
+- KullanÄ±cÄ± ve Todo iliÅŸkisi: Bir kullanÄ±cÄ± birden fazla Todo'ya sahip olabilir
+- CORS ve OpenAPI desteÄŸi
+- JSON dÃ¶ndÃ¼rmede `ReferenceLoopHandling.Ignore` ile dÃ¶ngÃ¼ sorunlarÄ± Ã¶nlenir
+
+---
+
+## ğŸ’» KullanÄ±lan Teknolojiler
+
+- ASP.NET Core 9.0
+- Entity Framework Core
+- SQL Server
+- ASP.NET Core Identity
+- JWT (JSON Web Token)
+- SMTP Email (Gmail)
+- OpenAPI / Swagger
+- Newtonsoft.Json
