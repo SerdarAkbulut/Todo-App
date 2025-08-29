@@ -9,7 +9,7 @@ using System.Net;
 
 namespace Crud_işlemleri.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/account")]
     [ApiController]
     public class AccountController : ControllerBase
     {
@@ -57,7 +57,7 @@ namespace Crud_işlemleri.Controllers
         [HttpPost("login")]
         public async Task<IActionResult>LoginUser([FromBody] LoginDTO model)
         {
-            var user = await _userManager.FindByNameAsync(model.UserName);
+            var user = await _userManager.FindByEmailAsync(model.Email);
             if (user == null)
             {
                 return BadRequest(new

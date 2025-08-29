@@ -8,7 +8,7 @@ using System.Security.Claims;
 
 namespace Crud_işlemleri.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/todo")]
     [ApiController]
     public class TodoController : ControllerBase
     {
@@ -41,12 +41,16 @@ namespace Crud_işlemleri.Controllers
         [HttpGet]
         public async Task<IActionResult> GetTasks()
         {
-            var userId=User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+            var userId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
             if (userId == null)
             {
                 return Unauthorized(new { message = "Unauthorized access" });
             }
-            var tasks= _context.Todos.ToListAsync();
+
+            var tasks = await _context.Todos
+                .Where(i => i.UserId == userId)
+                .ToListAsync();
+
             return Ok(tasks);
         }
 
@@ -90,6 +94,29 @@ namespace Crud_işlemleri.Controllers
             await _context.SaveChangesAsync();
 
             return Ok(new { task, message = "Task is updated" });
+        }
+
+        [HttpPut("complete/{id}")]
+        public async Task<IActionResult> CompleteTask( int id)
+        {
+            var userId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+            if (userId == null)
+            {
+                return Unauthorized(new { message = "Unauthorized access" });
+            }
+
+            var task = await _context.Todos.FirstOrDefaultAsync(t => t.Id == id && t.UserId == userId);
+            if (task == null)
+            {
+                return NotFound(new { message = "Task not found" });
+            }
+
+            task.IsCompleted=true;
+
+            _context.Todos.Update(task);
+            await _context.SaveChangesAsync();
+
+            return Ok(new { task, message = "Task is completed" });
         }
     }
 }

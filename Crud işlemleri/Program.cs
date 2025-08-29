@@ -20,9 +20,15 @@ builder.Services.AddDbContext<DataContext>(options =>
     options.UseSqlServer(connectionString);
 });
 var allowedOrigins = builder.Configuration.GetSection("AllowedOrigins").Get<string[]>();
-builder.Services.AddControllers().AddNewtonsoftJson(options =>
+
+builder.Services.AddCors(options =>
 {
-    options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore;
+    options.AddDefaultPolicy(policy =>
+    {
+        policy.WithOrigins(allowedOrigins) 
+              .AllowAnyHeader()
+              .AllowAnyMethod();
+    });
 });
 builder.Services.AddCors(options =>
 {
@@ -47,10 +53,10 @@ builder.Services.Configure<IdentityOptions>(options =>
     options.Password.RequireDigit = true;
 
     options.User.RequireUniqueEmail = true;
-
     options.User.AllowedUserNameCharacters =
-        "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789-._@+ / ";
+          "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789-._@+ðÐýÝöÖþÞüÜçÇ";
 });
+
 
 builder.Services.AddAuthentication(options =>
 {
@@ -85,7 +91,7 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
-
+app.UseCors();
 app.UseAuthorization();
 app.UseAuthentication();
 

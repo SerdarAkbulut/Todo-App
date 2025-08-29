@@ -18,6 +18,11 @@ namespace Crud_işlemleri.Data
                 .HasMany(u => u.Todos)
                 .WithOne()
                 .OnDelete(DeleteBehavior.Cascade);
+            builder.Entity<Todo>()
+          .HasOne(t => t.User)
+          .WithMany(u => u.Todos)
+          .HasForeignKey(t => t.UserId)
+          .IsRequired();
         }
     }
 }

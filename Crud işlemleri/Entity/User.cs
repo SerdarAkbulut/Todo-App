@@ -7,7 +7,6 @@ namespace Crud_işlemleri.Entity
     {
         public string Name { get; set; }
         public string SurName { get; set; }
-        public string UserName { get; set; }
        
         public ICollection<Todo> Todos { get; set; }
     }
